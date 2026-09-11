@@ -1,9 +1,6 @@
 from rest_framework import serializers
-from PIL import Image
 from .models import Scan, DegradationTest
-
-MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024  # 10MB
-ALLOWED_IMAGE_MIMES = ["image/jpeg", "image/png"]
+from .validators import validate_image_file
 
 
 class DegradationTestSerializer(serializers.ModelSerializer):
@@ -18,33 +15,10 @@ class DegradationTestSerializer(serializers.ModelSerializer):
 class ScanCreateSerializer(serializers.Serializer):
     """Payload validator for POST /api/scan."""
 
-    image = serializers.ImageField(required=True)
+    image = serializers.FileField(required=True, validators=[validate_image_file])
     caption = serializers.CharField(
         required=False, allow_blank=True, allow_null=True, write_only=True
     )
-
-    def validate_image(self, value):
-        if value.size > MAX_FILE_SIZE_BYTES:
-            raise serializers.ValidationError("File size exceeds 10MB limit.")
-
-        content_type = getattr(value, "content_type", None)
-        if content_type and content_type.lower() not in ALLOWED_IMAGE_MIMES:
-            raise serializers.ValidationError(
-                "Invalid MIME type. Only JPEG and PNG are allowed."
-            )
-
-        # Verify underlying image integrity
-        try:
-            value.seek(0)
-            img = Image.open(value)
-            img.verify()
-            if img.format not in ["JPEG", "PNG"]:
-                raise serializers.ValidationError("Only JPEG and PNG images supported.")
-            value.seek(0)
-        except Exception as exc:
-            raise serializers.ValidationError(f"Invalid image file: {exc}")
-
-        return value
 
 
 class ScanListSerializer(serializers.ModelSerializer):

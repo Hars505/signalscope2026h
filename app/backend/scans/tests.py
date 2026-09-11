@@ -143,3 +143,17 @@ class ScanEndpointTests(APITestCase):
             self.scan_url, {"image": oversized_file}, format="multipart"
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_txt_renamed_to_jpg_rejected(self):
+        """POST /api/scan/ rejects a text file disguised with a .jpg extension."""
+        renamed_file = SimpleUploadedFile(
+            "not_an_image.jpg",
+            b"This is purely plain text content inside a file ending with .jpg",
+            content_type="image/jpeg",
+        )
+        response = self.client.post(
+            self.scan_url, {"image": renamed_file}, format="multipart"
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("File is not a valid image", str(response.data))
+
