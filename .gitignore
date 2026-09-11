@@ -1,2 +1,25 @@
+# Agents/Skills
 .agents
 skills-lock.json
+
+# Python
+env/
+venv/
+*.pyc
+__pycache__/
+*.pyo
+
+# Django
+app/backend/db.sqlite3
+app/backend/media/
+app/backend/.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
