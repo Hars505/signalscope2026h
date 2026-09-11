@@ -206,25 +206,25 @@ Response shapes documented in endpoint tasks below.
 
 #### Task B2-1: JWT auth setup
 
-- [ ] Install and configure `djangorestframework-simplejwt` in settings:
+- [x] Install and configure `djangorestframework-simplejwt` in settings:
   - Add to `INSTALLED_APPS` and DRF `DEFAULT_AUTHENTICATION_CLASSES`
   - Set token lifetimes (access: 1 hour, refresh: 1 day — reasonable for demo)
-- [ ] Commit: "feat: simplejwt auth configuration"
+- [x] Commit: "feat: simplejwt auth configuration"
 
 #### Task B2-2: Auth serializers (`accounts/serializers.py`)
 
-- [ ] `SignupSerializer`:
+- [x] `SignupSerializer`:
   - Fields: `email`, `username`, `password`, `password_confirm`
   - Validate: passwords match, email unique, username unique, password strength (use Django validators)
   - Create user on save
-- [ ] `LoginSerializer`:
+- [x] `LoginSerializer`:
   - Fields: `email` (or `username`), `password`
   - Validate credentials, return user
-- [ ] Commit: "feat: auth serializers"
+- [x] Commit: "feat: auth serializers"
 
 #### Task B2-3: Auth views (`accounts/views.py`)
 
-- [ ] `SignupView` (POST /api/auth/signup):
+- [x] `SignupView` (POST /api/auth/signup):
   - Accept email, username, password, password_confirm
   - Create user
   - Return user info + JWT tokens (auto-login after signup)
@@ -235,66 +235,66 @@ Response shapes documented in endpoint tasks below.
       "tokens": { "access": "...", "refresh": "..." }
     }
     ```
-- [ ] `LoginView` (POST /api/auth/login):
+- [x] `LoginView` (POST /api/auth/login):
   - Accept email/username + password
   - Return JWT tokens
   - Same response shape as signup
-- [ ] `LogoutView` (POST /api/auth/logout):
+- [x] `LogoutView` (POST /api/auth/logout):
   - Accept refresh token, blacklist it
   - Requires authentication
-- [ ] `UserProfileView` (GET /api/auth/me) — optional but useful for frontend:
+- [x] `UserProfileView` (GET /api/auth/me) — optional but useful for frontend:
   - Returns current user info (id, username, email)
   - Requires authentication
-- [ ] Commit: "feat: auth signup/login/logout views"
+- [x] Commit: "feat: auth signup/login/logout views"
 
 #### Task B2-4: Auth URLs (`accounts/urls.py` + `config/urls.py`)
 
-- [ ] Wire up:
+- [x] Wire up:
   - `POST /api/auth/signup/` → SignupView
   - `POST /api/auth/login/` → LoginView
   - `POST /api/auth/logout/` → LogoutView
   - `GET /api/auth/me/` → UserProfileView
   - `POST /api/auth/token/refresh/` → SimpleJWT TokenRefreshView
-- [ ] Include accounts URLs in config/urls.py under `/api/auth/`
-- [ ] Commit: "feat: auth url routing"
+- [x] Include accounts URLs in config/urls.py under `/api/auth/`
+- [x] Commit: "feat: auth url routing"
 
 #### Task B2-5: CORS + security settings
 
-- [ ] Configure `django-cors-headers`:
+- [x] Configure `django-cors-headers`:
   - Add to `INSTALLED_APPS` and `MIDDLEWARE` (must be high in middleware order)
   - Set `CORS_ALLOWED_ORIGINS` = `["http://localhost:5173"]` (Vite dev server)
   - For production: add deployed frontend URL
-- [ ] Set DRF default permission: `IsAuthenticatedOrReadOnly`
-- [ ] Add DRF throttling on scan endpoint (optional, light): e.g. 30/hour for anon, 100/hour for auth
-- [ ] Commit: "feat: cors and security configuration"
+- [x] Set DRF default permission: `IsAuthenticatedOrReadOnly`
+- [x] Add DRF throttling on scan endpoint (optional, light): e.g. 30/hour for anon, 100/hour for auth
+- [x] Commit: "feat: cors and security configuration"
 
 #### Task B2-6: File upload validation (shared utility)
 
-- [ ] Create `scans/validators.py`:
+- [x] Create `scans/validators.py`:
   - `validate_image_file(file)`:
     - Check MIME type is in `["image/jpeg", "image/png"]`
     - Check file size under 10MB
     - Try opening with Pillow to verify it's a valid image (not just renamed)
     - Raise `ValidationError` with clear messages on failure
-- [ ] B1 will import this in the scan serializer — coordinate
-- [ ] Commit: "feat: image upload validators"
+- [x] B1 will import this in the scan serializer — coordinate
+- [x] Commit: "feat: image upload validators"
 
 #### Task B2-7: Django admin customization (`scans/admin.py`)
 
-- [ ] Register Scan model with custom admin:
+- [x] Register Scan model with custom admin:
   - `list_display`: id, user, label, confidence, created_at
   - `list_filter`: label, created_at
   - `search_fields`: user__username, user__email
   - `readonly_fields`: label, confidence, threshold_used, explanation_text
-- [ ] Customize User admin:
+- [x] Customize User admin:
   - Add `scan_count` method to `list_display`
   - Add `ScanInline` (TabularInline) to see user's scans on their detail page
-- [ ] Create a superuser for testing: `python manage.py createsuperuser`
-- [ ] Commit: "feat: django admin with scan counts and user management"
+- [x] Create a superuser for testing: `python manage.py createsuperuser`
+- [x] Commit: "feat: django admin with scan counts and user management"
 
 #### Task B2-8: Test auth endpoints
 
-- [ ] Use Postman/curl to test:
+- [x] Use Postman/curl to test:
   - POST /api/auth/signup with valid data (should create user + return tokens)
   - POST /api/auth/signup with duplicate email (should reject)
   - POST /api/auth/signup with weak password (should reject)
@@ -305,8 +305,8 @@ Response shapes documented in endpoint tasks below.
   - POST /api/auth/logout with refresh token (should blacklist)
   - POST /api/auth/token/refresh with valid refresh (should return new access)
   - Django admin: login, see users, see scan counts
-- [ ] Fix any issues found
-- [ ] Commit: "fix: auth edge cases"
+- [x] Fix any issues found
+- [x] Commit: "fix: auth edge cases"
 
 ---
 
