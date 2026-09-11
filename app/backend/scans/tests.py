@@ -157,3 +157,126 @@ class ScanEndpointTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("File is not a valid image", str(response.data))
 
+
+class EndToEndFlowTests(APITestCase):
+    """
+    Task 3.2: Complete end-to-end integration tests:
+    1. Signup -> Token -> Scan -> History -> Detail
+    2. Guest scan -> result returned -> not in user history
+    3. Django admin reflects scans and per-user scan counts
+    """
+
+    def setUp(self):
+        self.signup_url = "/api/auth/signup/"
+        self.scan_url = "/api/scan/"
+        self.history_url = "/api/history/"
+
+    def test_full_auth_and_scan_lifecycle(self):
+        # 1. Signup
+        signup_data = {
+            "username": "e2e_user",
+            "email": "e2e@example.com",
+            "password": "StrongPassword123!",
+            "password_confirm": "StrongPassword123!",
+        }
+        signup_resp = self.client.post(self.signup_url, signup_data)
+        self.assertEqual(signup_resp.status_code, status.HTTP_201_CREATED)
+        access_token = signup_resp.data["tokens"]["access"]
+        self.assertTrue(bool(access_token))
+
+        # 2. Upload scan with JWT token
+        auth_header = f"Bearer {access_token}"
+        image = create_test_image(format="JPEG")
+        scan_resp = self.client.post(
+            self.scan_url,
+            {"image": image, "caption": "E2E authenticity check"},
+            format="multipart",
+            HTTP_AUTHORIZATION=auth_header,
+        )
+        self.assertEqual(scan_resp.status_code, status.HTTP_201_CREATED)
+        scan_id = scan_resp.data["id"]
+        self.assertIn("label", scan_resp.data)
+        self.assertIn("confidence", scan_resp.data)
+
+        # 3. View in History
+        history_resp = self.client.get(
+            self.history_url, HTTP_AUTHORIZATION=auth_header
+        )
+        self.assertEqual(history_resp.status_code, status.HTTP_200_OK)
+        results = history_resp.data.get("results", history_resp.data)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["id"], scan_id)
+
+        # 4. View Detail
+        detail_resp = self.client.get(
+            f"/api/history/{scan_id}/", HTTP_AUTHORIZATION=auth_header
+        )
+        self.assertEqual(detail_resp.status_code, status.HTTP_200_OK)
+        self.assertEqual(detail_resp.data["id"], scan_id)
+        self.assertEqual(detail_resp.data["label"], scan_resp.data["label"])
+        self.assertEqual(detail_resp.data["explanation"], scan_resp.data["explanation"])
+
+    def test_guest_scan_lifecycle(self):
+        # Guest scans without credentials
+        image = create_test_image(format="PNG")
+        scan_resp = self.client.post(self.scan_url, {"image": image}, format="multipart")
+        self.assertEqual(scan_resp.status_code, status.HTTP_201_CREATED)
+        self.assertIn("id", scan_resp.data)
+        self.assertIn("confidence", scan_resp.data)
+
+        # History is inaccessible to guest
+        history_resp = self.client.get(self.history_url)
+        self.assertEqual(history_resp.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_admin_displays_scans_and_user_counts(self):
+        # Setup superuser
+        admin_user = User.objects.create_superuser(
+            username="admin_user",
+            email="admin@example.com",
+            password="AdminPassword123!",
+        )
+        regular_user = User.objects.create_user(
+            username="regular_user",
+            email="regular@example.com",
+            password="UserPassword123!",
+        )
+
+        # Create 2 scans for regular_user and 1 guest scan
+        img = create_test_image()
+        Scan.objects.create(
+            user=regular_user,
+            image=img,
+            label="real",
+            confidence=0.9,
+            threshold_used=0.5,
+        )
+        Scan.objects.create(
+            user=regular_user,
+            image=img,
+            label="ai_generated",
+            confidence=0.8,
+            threshold_used=0.5,
+        )
+        Scan.objects.create(
+            user=None,
+            image=img,
+            label="real",
+            confidence=0.7,
+            threshold_used=0.5,
+        )
+
+        # Verify admin scan_count method
+        from django.contrib.admin.sites import site
+        from scans.admin import CustomUserAdmin
+        custom_user_admin = CustomUserAdmin(User, site)
+        self.assertEqual(custom_user_admin.scan_count(regular_user), 2)
+        self.assertEqual(custom_user_admin.scan_count(admin_user), 0)
+
+        # Test admin UI pages load with 200
+        self.client.force_login(admin_user)
+        scans_admin_resp = self.client.get("/admin/scans/scan/")
+        self.assertEqual(scans_admin_resp.status_code, status.HTTP_200_OK)
+        users_admin_resp = self.client.get("/admin/auth/user/")
+        self.assertEqual(users_admin_resp.status_code, status.HTTP_200_OK)
+
+
