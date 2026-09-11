@@ -36,3 +36,16 @@ class Scan(models.Model):
 
     def __str__(self):
         return f"Scan #{self.pk} — {self.label} ({self.confidence:.0%})"
+
+
+class DegradationTest(models.Model):
+    """Robustness self-test result per scan — Module C."""
+
+    scan = models.ForeignKey(
+        Scan, related_name="degradation_tests", on_delete=models.CASCADE
+    )
+    transform_type = models.CharField(max_length=30)  # jpeg_recompress, resize, screenshot
+    confidence_after = models.FloatField()
+
+    def __str__(self):
+        return f"{self.transform_type} → {self.confidence_after:.0%}"
