@@ -38,12 +38,17 @@ class ScanCreateView(generics.CreateAPIView):
             prediction = run_prediction(image_file, caption=caption)
         except ValueError as exc:
             return Response(
-                {"error": str(exc)}, status=status.HTTP_400_BAD_REQUEST
+                {"error": str(exc), "code": "INVALID_IMAGE"},
+                status=status.HTTP_400_BAD_REQUEST,
             )
         except Exception as exc:
             logger.error("Scan inference failed: %s", exc)
             return Response(
-                {"error": "Inference service failed", "detail": str(exc)},
+                {
+                    "error": "Inference service failed",
+                    "code": "INFERENCE_ERROR",
+                    "detail": str(exc),
+                },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 

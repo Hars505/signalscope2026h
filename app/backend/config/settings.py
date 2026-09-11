@@ -132,6 +132,7 @@ REST_FRAMEWORK = {
         'anon': '30/hour',
         'user': '100/hour',
     },
+    'EXCEPTION_HANDLER': 'config.exceptions.custom_exception_handler',
 }
 
 

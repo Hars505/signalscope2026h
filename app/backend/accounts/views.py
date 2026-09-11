@@ -77,7 +77,7 @@ class LogoutView(GenericAPIView):
         refresh_token = request.data.get('refresh')
         if not refresh_token:
             return Response(
-                {'error': 'Refresh token is required.'},
+                {'error': 'Refresh token is required.', 'code': 'REFRESH_TOKEN_REQUIRED'},
                 status=status.HTTP_400_BAD_REQUEST,
             )
         try:
@@ -89,7 +89,7 @@ class LogoutView(GenericAPIView):
             )
         except Exception:
             return Response(
-                {'error': 'Invalid or already blacklisted token.'},
+                {'error': 'Invalid or already blacklisted token.', 'code': 'INVALID_TOKEN'},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 

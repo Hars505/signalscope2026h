@@ -280,3 +280,54 @@ class EndToEndFlowTests(APITestCase):
         self.assertEqual(users_admin_resp.status_code, status.HTTP_200_OK)
 
 
+class ErrorHandlerConsistencyTests(APITestCase):
+    """
+    Task 3.3: Verify error response consistency:
+    Format: {"error": "...", "code": "..."}
+    Covers: 400 (validation), 401 (not authenticated), 404 (not found), 500 (model failure)
+    """
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="err_user", email="err@example.com", password="Password123!"
+        )
+
+    def test_400_validation_error_format(self):
+        fake_file = SimpleUploadedFile(
+            "fake.txt", b"plain text", content_type="text/plain"
+        )
+        resp = self.client.post(
+            "/api/scan/", {"image": fake_file}, format="multipart"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("error", resp.data)
+        self.assertIn("code", resp.data)
+        self.assertEqual(resp.data["code"], "VALIDATION_ERROR")
+
+    def test_401_unauthenticated_error_format(self):
+        resp = self.client.get("/api/history/")
+        self.assertEqual(resp.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertIn("error", resp.data)
+        self.assertIn("code", resp.data)
+        self.assertEqual(resp.data["code"], "NOT_AUTHENTICATED")
+
+    def test_404_not_found_error_format(self):
+        self.client.force_authenticate(user=self.user)
+        resp = self.client.get("/api/history/999999/")
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertIn("error", resp.data)
+        self.assertIn("code", resp.data)
+        self.assertEqual(resp.data["code"], "NOT_FOUND")
+
+    def test_500_model_failure_error_format(self):
+        from unittest.mock import patch
+        with patch("scans.views.run_prediction", side_effect=RuntimeError("Weights missing")):
+            img = create_test_image()
+            resp = self.client.post("/api/scan/", {"image": img}, format="multipart")
+            self.assertEqual(resp.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
+            self.assertIn("error", resp.data)
+            self.assertIn("code", resp.data)
+            self.assertEqual(resp.data["code"], "INFERENCE_ERROR")
+
+
+
