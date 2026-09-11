@@ -31,7 +31,7 @@ class CustomUserAdmin(UserAdmin):
 
     @admin.display(description='Scans')
     def scan_count(self, obj):
-        return obj.scan_set.count()
+        return obj.scans.count() if hasattr(obj, 'scans') else obj.scan_set.count()
 
 
 @admin.register(Scan)
