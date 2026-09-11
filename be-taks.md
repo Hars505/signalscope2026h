@@ -314,27 +314,27 @@ Response shapes documented in endpoint tasks below.
 
 #### Task 3.1: Wire validators into scan endpoint
 
-- [ ] B1 imports B2's `validate_image_file` in ScanCreateSerializer
-- [ ] Test: upload a .txt file renamed to .jpg — should reject
-- [ ] Commit: "feat: wire file validation into scan endpoint"
+- [x] B1 imports B2's `validate_image_file` in ScanCreateSerializer
+- [x] Test: upload a .txt file renamed to .jpg — should reject
+- [x] Commit: "feat: wire file validation into scan endpoint"
 
 #### Task 3.2: Test authenticated scan flow end-to-end
 
-- [ ] Signup → get token → POST /api/scan with token + image → GET /api/history → see scan in list → GET /api/history/<id> → see full detail
-- [ ] Test guest flow: POST /api/scan without token → get result but no history
-- [ ] Confirm Django admin shows scans, user scan counts
-- [ ] Commit: "test: full auth + scan flow verified"
+- [x] Signup → get token → POST /api/scan with token + image → GET /api/history → see scan in list → GET /api/history/<id> → see full detail
+- [x] Test guest flow: POST /api/scan without token → get result but no history
+- [x] Confirm Django admin shows scans, user scan counts
+- [x] Commit: "test: full auth + scan flow verified"
 
 #### Task 3.3: Error handling consistency
 
-- [ ] Agree on error response format across all endpoints:
+- [x] Agree on error response format across all endpoints:
   ```
   { "error": "Human readable message", "code": "MACHINE_CODE" }
   ```
   or use DRF's default `{"detail": "..."}` — just be consistent
-- [ ] Add a custom exception handler in DRF settings if needed
-- [ ] Handle: 400 (validation), 401 (not authenticated), 403 (not owner), 404 (scan not found), 500 (model failure)
-- [ ] Commit: "feat: consistent error responses"
+- [x] Add a custom exception handler in DRF settings if needed
+- [x] Handle: 400 (validation), 401 (not authenticated), 403 (not owner), 404 (scan not found), 500 (model failure)
+- [x] Commit: "feat: consistent error responses"
 
 #### Task 3.4: Swap mock for real ML predict (when ML team delivers)
 
@@ -353,15 +353,15 @@ Response shapes documented in endpoint tasks below.
 
 #### Task 4.1: Settings for production (B2)
 
-- [ ] `DEBUG = False` in production
-- [ ] `ALLOWED_HOSTS` configured
-- [ ] Static files collection: `python manage.py collectstatic`
-- [ ] Optional: add `gunicorn` to requirements for production serving
-- [ ] Commit: "feat: production settings"
+- [x] `DEBUG = False` in production
+- [x] `ALLOWED_HOSTS` configured
+- [x] Static files collection: `python manage.py collectstatic`
+- [x] Optional: add `gunicorn` to requirements for production serving
+- [x] Commit: "feat: production settings"
 
 #### Task 4.2: Backend README section (B1 + B2)
 
-- [ ] Document setup instructions (must work in < 10 minutes from clone):
+- [x] Document setup instructions (must work in < 10 minutes from clone):
   1. `cd app/backend`
   2. `python -m venv venv && venv\Scripts\activate`
   3. `pip install -r requirements.txt`
@@ -369,17 +369,17 @@ Response shapes documented in endpoint tasks below.
   5. `python manage.py migrate`
   6. `python manage.py createsuperuser`
   7. `python manage.py runserver`
-- [ ] Document all API endpoints with request/response examples
-- [ ] Commit: "docs: backend setup and api documentation"
+- [x] Document all API endpoints with request/response examples
+- [x] Commit: "docs: backend setup and api documentation"
 
 #### Task 4.3: Clean clone test (B1 + B2 together)
 
-- [ ] Clone repo fresh into temp folder
-- [ ] Follow only README instructions
-- [ ] Confirm: server starts, scan endpoint works, admin loads, auth works
-- [ ] Must complete in under 10 minutes
-- [ ] Fix anything broken
-- [ ] Commit: "fix: reproducibility issues from clean clone test"
+- [x] Clone repo fresh into temp folder
+- [x] Follow only README instructions
+- [x] Confirm: server starts, scan endpoint works, admin loads, auth works
+- [x] Must complete in under 10 minutes
+- [x] Fix anything broken
+- [x] Commit: "fix: reproducibility issues from clean clone test"
 
 ---
 
