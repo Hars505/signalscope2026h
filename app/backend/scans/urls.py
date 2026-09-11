@@ -1,7 +1,10 @@
-"""Scans app URL configuration. B1 owns this file."""
-
 from django.urls import path
+from .views import ScanCreateView, ScanHistoryView, ScanDetailView
+
+app_name = "scans"
 
 urlpatterns = [
-    # B1 will add scan/history endpoints here
+    path("scan/", ScanCreateView.as_view(), name="scan-create"),
+    path("history/", ScanHistoryView.as_view(), name="scan-history"),
+    path("history/<int:pk>/", ScanDetailView.as_view(), name="scan-detail"),
 ]
