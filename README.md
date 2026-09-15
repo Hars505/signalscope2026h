@@ -464,7 +464,7 @@ npm run build
 - **One-page report:** [`ModelsP2/report/model_report.md`](ModelsP2/report/model_report.md)
 - **Compliance matrix:** [`COMPLIANCE_STATUS.md`](COMPLIANCE_STATUS.md)
 - **Dataset and originality notes:** [`DATASET_LICENSES.md`](DATASET_LICENSES.md)
-- **Demo video:** `TODO: add the final 3–5 minute unlisted URL`
+- **Demo video:** [Watch the SignalScope website demo](https://drive.google.com/file/d/1emYaN1ZVg-sOZL75elun3UUbnpBArh9y/view?usp=drive_link)
 - **Deployed application:** `TODO: add the final public URL`
 
 The demo should show a new-image prediction, confidence and label,
