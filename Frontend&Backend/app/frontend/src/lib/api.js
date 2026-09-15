@@ -1,6 +1,6 @@
 import { createMockScanResult, INITIAL_MOCK_HISTORY } from './mockData';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 const LOCAL_HISTORY_CACHE_VERSION = '2026-09-15-history-purge-v2';
 const LOCAL_HISTORY_VERSION_KEY = 'signalscope_history_version';
 const PURGED_HISTORY_IDS = new Set([26, 27, 28, 30, 33, 34, 36, 37]);
