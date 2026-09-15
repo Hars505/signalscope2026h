@@ -369,8 +369,11 @@ def run_prediction(image_input, caption: str | None = None) -> dict:
         vit_predictor, bonus_predictor, distilled_predictor = _get_predictors()
         vit_result = vit_predictor.predict_from_pil(image)
     except (ImportError, ModuleNotFoundError, FileNotFoundError, RuntimeError) as exc:
-        logger.error("VIT_Model verdict predictor unavailable: %s", exc)
-        raise RuntimeError("VIT_Model inference is unavailable.") from exc
+        logger.warning("ML weights or inference predictor unavailable: %s. Using fallback prediction mode.", exc)
+        res = _fallback_prediction()
+        res["provenance"] = provenance
+        res["multimodal_result"] = multimodal_result
+        return res
 
     distilled_ai_probability = distilled_predictor(image)
 
