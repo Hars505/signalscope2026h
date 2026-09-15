@@ -1,0 +1,16 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+Django==5.2.3
+djangorestframework==3.16.0
+django-cors-headers==4.7.0
+djangorestframework-simplejwt==5.5.0
+drf-spectacular==0.28.0
+Pillow==12.3.0
+gunicorn==23.0.0
+
+# In-process inference dependencies (CPU wheels for lightweight cloud deployment)
+torch
+torchvision
+transformers>=4.30.0
+numpy>=1.24.0
+scipy>=1.10.0
+opencv-python-headless>=4.7.0
