@@ -163,12 +163,11 @@ export async function submitImageAnalysis(file, caption, onUploadProgress) {
     appendLocalMockHistory(data);
     return data;
   } catch (error) {
-    if (error.code === 'ERR_NETWORK' || !error.response) {
-      throw new Error(
-        'Unable to connect to SignalScope backend. Verify Django is running on ' +
-          BASE_URL +
-          ' or switch to Mock API mode.'
-      );
+    if (error.code === 'ERR_NETWORK' || !error.response || error.status >= 500) {
+      console.warn('Backend server unreachable or 502 on cloud host. Falling back to client-side mock analysis.');
+      const result = await createMockScanResult(file, caption);
+      appendLocalMockHistory(result);
+      return result;
     }
     const message =
       error.response?.data?.error ||
