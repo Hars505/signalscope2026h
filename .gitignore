@@ -90,6 +90,9 @@ dist-ssr/
 **/dist-ssr/
 .vite/
 **/.vite/
+# The frontend's source library is part of the application, not a build artifact.
+!Frontend&Backend/app/frontend/src/lib/
+!Frontend&Backend/app/frontend/src/lib/**
 
 # ------------------------------------------------------------------------------
 # 5. Environment Variables & Secrets
