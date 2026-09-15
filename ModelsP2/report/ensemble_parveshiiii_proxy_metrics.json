@@ -1,0 +1,23 @@
+{
+  "evaluation_type": "local_proxy_only",
+  "manifest": "../../../ModelsP2/data/parveshiiii_subset/processed/test.csv",
+  "samples": 836,
+  "weights": {
+    "vit_model": 0.1,
+    "modelsp2_vit_fft": 0.8,
+    "ai_image_detect_distilled": 0.1
+  },
+  "threshold": 0.3,
+  "roc_auc": 0.9495,
+  "macro_f1": 0.8373,
+  "accuracy": 0.8397,
+  "precision_ai": 0.7731,
+  "recall_ai": 0.9617,
+  "false_positive_rate": 0.2823,
+  "confusion_matrix": {
+    "tn": 300,
+    "fp": 118,
+    "fn": 16,
+    "tp": 402
+  }
+}

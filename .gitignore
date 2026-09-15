@@ -1,0 +1,171 @@
+# ==============================================================================
+# Git Ignore for SIH26 Project (Monorepo: Django + React + ML Pipelines)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Virtual Environments & Dependencies
+# ------------------------------------------------------------------------------
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+*/venv/
+*/.venv/
+Frontend&Backend/venv/
+Frontend&Backend/app/backend/.venv/
+pyvenv.cfg
+
+# Node / Frontend Dependencies
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+
+# ------------------------------------------------------------------------------
+# 2. Python & Build Artifacts
+# ------------------------------------------------------------------------------
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.pytype/
+.ruff_cache/
+
+# ------------------------------------------------------------------------------
+# 3. Django Backend (Local Database, Media, Static)
+# ------------------------------------------------------------------------------
+# SQLite databases
+*.sqlite3
+*.sqlite3-journal
+db.sqlite3
+**/db.sqlite3
+
+# Uploaded user media & generated heatmaps (preserves .gitkeep if added)
+media/
+**/media/*
+!**/media/.gitkeep
+
+# Collected static files
+staticfiles/
+**/staticfiles/
+
+# Logs
+*.log
+logs/
+**/logs/
+
+# ------------------------------------------------------------------------------
+# 4. Frontend (Vite / React Build Output)
+# ------------------------------------------------------------------------------
+dist/
+**/dist/
+dist-ssr/
+**/dist-ssr/
+.vite/
+**/.vite/
+# The frontend's source library is part of the application, not a build artifact.
+!Frontend&Backend/app/frontend/src/lib/
+!Frontend&Backend/app/frontend/src/lib/**
+
+# ------------------------------------------------------------------------------
+# 5. Environment Variables & Secrets
+# ------------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.env
+**/.env
+**/.env.*
+!**/.env.example
+
+# ------------------------------------------------------------------------------
+# 6. Machine Learning Datasets & Large Model Weights
+# (GitHub blocks any file >100MB. Datasets & checkpoint binaries exceed this)
+# ------------------------------------------------------------------------------
+# Datasets & image pools (3+ GB)
+ModelsP2/data/
+**/data/raw/
+**/data/processed/
+**/data/*_subset/
+*.parquet
+*.h5
+*.hdf5
+
+# Heavy model checkpoints & weights (>100MB fails git push without Git LFS)
+ModelsP2/models/trained/
+*.pt
+*.pth
+*.bin
+*.ckpt
+*.onnx
+*.safetensors
+
+# Large video assets not tracked in source
+*.mp4
+
+# NOTE: If you use Git LFS and wish to track specific lightweight models,
+# whitelist them below by un-commenting:
+# !VIT_Model/ML/VIT_models/best_model.pt
+# !ai-image-detect-distilled/model.safetensors
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+**/.ipynb_checkpoints/
+
+# ------------------------------------------------------------------------------
+# 7. IDE & Editor Artifacts
+# ------------------------------------------------------------------------------
+.vscode/
+**/.vscode/
+.idea/
+**/.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ------------------------------------------------------------------------------
+# 8. Operating System Files
+# ------------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ------------------------------------------------------------------------------
+# 9. AI Agent / Tool Artifacts
+# ------------------------------------------------------------------------------
+.agents/
+skills-lock.json
