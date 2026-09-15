@@ -11,7 +11,10 @@ export function isMockModeEnabled() {
   if (manualPreference !== null) {
     return manualPreference === 'true';
   }
-  return import.meta.env.VITE_USE_MOCK_API === 'true';
+  if (import.meta.env.VITE_USE_MOCK_API !== undefined) {
+    return import.meta.env.VITE_USE_MOCK_API === 'true';
+  }
+  return true; // Default to Mock API mode for zero-setup, reliable web deployments
 }
 
 export function setMockModePreference(enabled) {
