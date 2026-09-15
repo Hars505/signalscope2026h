@@ -1,0 +1,7 @@
+{
+  "extraPaths": [
+    "../../../ModelsP2"
+  ],
+  "venvPath": ".",
+  "venv": ".venv"
+}

@@ -1,0 +1,78 @@
+{
+  "sample_size": 1,
+  "explainability": {
+    "status": "proxy_validated",
+    "results": [
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.039,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      }
+    ]
+  },
+  "robustness": {
+    "clean": {
+      "roc_auc": 0.5,
+      "macro_f1": 1.0,
+      "accuracy": 1.0
+    },
+    "jpeg": {
+      "qf_90": {
+        "roc_auc": 0.5,
+        "macro_f1": 1.0,
+        "accuracy": 1.0
+      },
+      "qf_70": {
+        "roc_auc": 0.5,
+        "macro_f1": 1.0,
+        "accuracy": 1.0
+      },
+      "qf_50": {
+        "roc_auc": 0.5,
+        "macro_f1": 1.0,
+        "accuracy": 1.0
+      },
+      "qf_30": {
+        "roc_auc": 0.5,
+        "macro_f1": 1.0,
+        "accuracy": 1.0
+      },
+      "qf_10": {
+        "roc_auc": 0.5,
+        "macro_f1": 1.0,
+        "accuracy": 1.0
+      }
+    },
+    "resize": {
+      "scale_75": {
+        "roc_auc": 0.5,
+        "macro_f1": 1.0,
+        "accuracy": 1.0
+      },
+      "scale_50": {
+        "roc_auc": 0.5,
+        "macro_f1": 1.0,
+        "accuracy": 1.0
+      },
+      "scale_25": {
+        "roc_auc": 0.5,
+        "macro_f1": 1.0,
+        "accuracy": 1.0
+      }
+    },
+    "screenshot": {
+      "roc_auc": 0.5,
+      "macro_f1": 1.0,
+      "accuracy": 1.0
+    }
+  },
+  "generator_attribution": {
+    "status": "unavailable",
+    "reason": "No trained attribution checkpoint is present."
+  },
+  "adversarial": {
+    "status": "validated_in_ui_path",
+    "attack": "PGD",
+    "defence": "median_filter_plus_jpeg"
+  }
+}
