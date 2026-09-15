@@ -1,0 +1,233 @@
+{
+  "sample_size": 32,
+  "explainability": {
+    "status": "proxy_validated",
+    "results": [
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.4956,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.4722,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.469,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.4723,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.3945,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.4211,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.447,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.4291,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.5503,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.4326,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.4032,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.4382,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.7303,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.5456,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.3407,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.594,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.6855,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.5801,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.4909,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.405,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.6123,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.6181,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.5661,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.6603,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.6747,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.5343,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.4641,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.5703,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.6009,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.7082,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.5771,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      },
+      {
+        "hot_region_fraction": 1.0,
+        "target_score_change_after_masking": 0.5378,
+        "note": "Proxy only; official localization requires annotated artefacts."
+      }
+    ]
+  },
+  "robustness": {
+    "clean": {
+      "roc_auc": 0.4434,
+      "macro_f1": 0.3333,
+      "accuracy": 0.5
+    },
+    "jpeg": {
+      "qf_90": {
+        "roc_auc": 0.4434,
+        "macro_f1": 0.3333,
+        "accuracy": 0.5
+      },
+      "qf_70": {
+        "roc_auc": 0.4609,
+        "macro_f1": 0.3333,
+        "accuracy": 0.5
+      },
+      "qf_50": {
+        "roc_auc": 0.4785,
+        "macro_f1": 0.3333,
+        "accuracy": 0.5
+      },
+      "qf_30": {
+        "roc_auc": 0.5,
+        "macro_f1": 0.3333,
+        "accuracy": 0.5
+      },
+      "qf_10": {
+        "roc_auc": 0.5,
+        "macro_f1": 0.3333,
+        "accuracy": 0.5
+      }
+    },
+    "resize": {
+      "scale_75": {
+        "roc_auc": 0.5234,
+        "macro_f1": 0.3333,
+        "accuracy": 0.5
+      },
+      "scale_50": {
+        "roc_auc": 0.5742,
+        "macro_f1": 0.3333,
+        "accuracy": 0.5
+      },
+      "scale_25": {
+        "roc_auc": 0.6719,
+        "macro_f1": 0.5135,
+        "accuracy": 0.5938
+      }
+    },
+    "screenshot": {
+      "roc_auc": 0.5,
+      "macro_f1": 0.3333,
+      "accuracy": 0.5
+    }
+  },
+  "generator_attribution": {
+    "status": "unavailable",
+    "reason": "No trained attribution checkpoint is present."
+  },
+  "adversarial": {
+    "status": "validated_in_ui_path",
+    "attack": "PGD",
+    "defence": "median_filter_plus_jpeg"
+  }
+}

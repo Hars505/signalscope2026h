@@ -1,0 +1,340 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  :root {
+    --background: #F4F8F5;
+    --background-secondary: #EEF5F0;
+    --surface: #FFFFFF;
+    --surface-elevated: #FFFFFF;
+    --surface-hover: #EEF5F0;
+    --foreground: #0B2B1F;
+    --foreground-secondary: #49665A;
+    --foreground-muted: #71867C;
+    --accent: #12A879;
+    --accent-hover: #0D9168;
+    --accent-soft: #DDF5EA;
+    --accent-border: #A9DEC8;
+    --accent-highlight: #12A879;
+    --border: rgba(11, 43, 31, 0.12);
+    --border-strong: rgba(11, 43, 31, 0.22);
+    --border-subtle: rgba(18, 168, 121, 0.16);
+    --border-glow: rgba(18, 168, 121, 0.35);
+    --icon: #0B2B1F;
+    --icon-muted: #71867C;
+    --success: #12A879;
+    --warning: #D97706;
+    --error: #E11D48;
+    --grid-color: rgba(11, 43, 31, 0.055);
+    --grid-dot-color: rgba(11, 43, 31, 0.18);
+    --shadow: 0 4px 20px -2px rgba(11, 43, 31, 0.06);
+    --focus-ring: rgba(18, 168, 121, 0.5);
+
+    /* Backwards-compatibility token aliases */
+    --bg-primary: #F4F8F5;
+    --bg-surface: rgba(255, 255, 255, 0.85);
+    --text-primary: #0B2B1F;
+    --text-secondary: #49665A;
+    --text-muted: #71867C;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  ::selection {
+    background-color: var(--accent-soft);
+    color: var(--foreground);
+  }
+}
+
+/* Gradient Text styles with calibrated contrast */
+.gradient-text-indigo {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#0B2B1F] via-[#12A879] to-[#0D9168];
+}
+
+.gradient-text-cyan {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#0B2B1F] via-[#12A879] to-[#21C58A];
+}
+
+.gradient-text-amber {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-800 via-orange-600 to-rose-600;
+}
+
+/* Translucent Frosted Glass Card System matching light sage & dark forest aesthetics */
+.glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 248, 245, 0.96) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  position: relative;
+  box-shadow: var(--shadow);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: var(--border-glow);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(240, 249, 242, 0.98) 100%);
+  box-shadow: 0 14px 38px -6px rgba(18, 168, 121, 0.18);
+}
+
+.glass-panel-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: var(--border-glow);
+  box-shadow: 0 14px 38px -6px rgba(18, 168, 121, 0.2);
+}
+
+/* Stellar Spotlight Card Hover Effect */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 248, 245, 0.96) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.spotlight-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: var(--border-glow);
+  box-shadow: 0 14px 38px -6px rgba(18, 168, 121, 0.18);
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+      rgba(18, 168, 121, 0.12),
+      transparent 65%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* Subtle Glowing Border */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--border-glow), var(--accent-border), var(--border));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Technical grid background */
+.bg-stellar-grid {
+  background-size: 48px 48px;
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+}
+
+/* Technical dot-matrix background */
+.bg-stellar-dots {
+  background-size: 32px 32px;
+  background-image: radial-gradient(circle, var(--grid-dot-color) 1.25px, transparent 1.25px);
+}
+
+/* Scanning animation line with emerald beam */
+@keyframes scanline {
+  0% {
+    top: 0%;
+    opacity: 0.85;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 98%;
+    opacity: 0.85;
+  }
+}
+
+.animate-scanner {
+  animation: scanline 2.2s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  will-change: top, opacity;
+}
+
+/* Continuous Marquee Ticker Keyframes with GPU translate3d */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Slow spin for radar & orbitals with GPU transform */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+/* Ambient nebula slow movement (18-25s) */
+@keyframes ambientDrift {
+  0% {
+    transform: translate3d(-50%, 0px, 0) scale(1);
+    opacity: 0.92;
+  }
+
+  50% {
+    transform: translate3d(-50%, 8px, 0) scale(1.025);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(-50%, 0px, 0) scale(1);
+    opacity: 0.92;
+  }
+}
+
+.animate-ambient-drift {
+  animation: ambientDrift 22s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform, opacity;
+}
+
+/* Subtle organic floating motion for decorative badges, nodes and sparkles (5-12s, translateY ±4px, rotate ±1.5deg) */
+@keyframes floatSubtle1 {
+  0% {
+    transform: translate3d(0, 0px, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, -4px, 0) rotate(1.2deg);
+  }
+
+  100% {
+    transform: translate3d(0, 0px, 0) rotate(0deg);
+  }
+}
+
+@keyframes floatSubtle2 {
+  0% {
+    transform: translate3d(0, 0px, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, 4px, 0) rotate(-1.2deg);
+  }
+
+  100% {
+    transform: translate3d(0, 0px, 0) rotate(0deg);
+  }
+}
+
+@keyframes floatSubtle3 {
+  0% {
+    transform: translate3d(0, 0px, 0);
+  }
+
+  50% {
+    transform: translate3d(-3px, -3px, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0px, 0);
+  }
+}
+
+.animate-float-1 {
+  animation: floatSubtle1 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform;
+}
+
+.animate-float-2 {
+  animation: floatSubtle2 11s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform;
+}
+
+.animate-float-3 {
+  animation: floatSubtle3 9.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform;
+}
+
+/* Idle subtle breathing glow for upload zone (6-8s) */
+@keyframes subtleBreathe {
+
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.996);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: scale(1.004);
+  }
+}
+
+.animate-breathe {
+  animation: subtleBreathe 7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: opacity, transform;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

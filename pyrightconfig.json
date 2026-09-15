@@ -1,0 +1,13 @@
+{
+  "extraPaths": [
+    "ModelsP2"
+  ],
+  "venvPath": "Frontend&Backend/app/backend",
+  "venv": ".venv",
+  "executionEnvironments": [
+    {
+      "root": "Frontend&Backend/app/backend",
+      "extraPaths": ["../../../ModelsP2"]
+    }
+  ]
+}

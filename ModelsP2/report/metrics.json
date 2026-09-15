@@ -1,0 +1,53 @@
+{
+  "signalscope_detector": {
+    "roc_auc": 0.9484,
+    "macro_f1": 0.8669,
+    "accuracy": 0.8672,
+    "false_positive_rate": 0.0813,
+    "confusion_matrix": {
+      "tn": 384,
+      "fp": 34,
+      "fn": 77,
+      "tp": 341
+    }
+  },
+  "baseline_detector": {
+    "roc_auc": 0.9501,
+    "macro_f1": 0.8899,
+    "accuracy": 0.89,
+    "false_positive_rate": 0.1244,
+    "confusion_matrix": {
+      "tn": 366,
+      "fp": 52,
+      "fn": 40,
+      "tp": 378
+    }
+  },
+  "validation": {
+    "signalscope_detector": {
+      "roc_auc": 0.9411,
+      "macro_f1": 0.8561,
+      "accuracy": 0.857,
+      "false_positive_rate": 0.0673,
+      "confusion_matrix": {
+        "tn": 388,
+        "fp": 28,
+        "fn": 91,
+        "tp": 325
+      }
+    },
+    "baseline_detector": {
+      "roc_auc": 0.9365,
+      "macro_f1": 0.8606,
+      "accuracy": 0.8606,
+      "false_positive_rate": 0.1466,
+      "confusion_matrix": {
+        "tn": 355,
+        "fp": 61,
+        "fn": 55,
+        "tp": 361
+      }
+    }
+  },
+  "temperature_scaling_factor": 1.4546271562576294
+}

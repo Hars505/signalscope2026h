@@ -1,0 +1,42 @@
+data:
+  raw_dir: data/parveshiiii_subset/raw
+  processed_dir: data/parveshiiii_subset/processed
+  train_split: 0.80
+  val_split: 0.10
+  test_split: 0.10
+  holdout_generators: 0
+  use_genimage: false
+  seed: 42
+  image_size: 224
+  num_workers: 4
+  pin_memory: true
+
+model:
+  backbone: google/vit-base-patch16-224
+  use_frequency_features: true
+  freq_embed_dim: 128
+  classifier_hidden: 512
+  dropout: 0.3
+  num_classes: 2
+  final_model_path: models/trained/signalscope-latest-candidate
+  baseline_model_path: models/trained/baseline-latest-candidate
+  resume_model_path: models/trained/signalscope-final/pytorch_model.bin
+  resume_baseline_path: models/trained/baseline-final/pytorch_model.bin
+
+train:
+  batch_size: 32
+  gradient_accumulation_steps: 2
+  num_epochs: 2
+
+
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  early_stop_patience: 3
+  early_stop_metric: val_roc_auc
+  use_mlflow: false
+
+calibration:
+  method: temperature_scaling
+  max_iter: 50
+  lr: 0.01
