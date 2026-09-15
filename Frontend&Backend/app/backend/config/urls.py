@@ -32,6 +32,6 @@ urlpatterns = [
     path('api/docs/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
 
-# Serve media files in development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve uploaded scan media. For durable production storage, configure an object
+# storage backend instead of relying on Render's ephemeral filesystem.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

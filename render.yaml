@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: signalscope-api
+    runtime: python
+    rootDir: "Frontend&Backend/app/backend"
+    buildCommand: pip install -r requirements-render.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+    healthCheckPath: /api/docs/schema/
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: SIGNALSCOPE_ENABLE_ML
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: FRONTEND_URL
+        sync: false

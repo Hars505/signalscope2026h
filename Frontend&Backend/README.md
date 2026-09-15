@@ -82,3 +82,38 @@ npm run dev
 ```
 - **Frontend App**: `http://localhost:5173/`
 - **Live / Mock Mode Toggle**: Click the "Live API:8000" / "Mock Engine" switch in the navigation bar to test either live backend responses or the client-side mock simulation.
+
+---
+
+## ☁️ Deploying to Vercel + Render
+
+Deploy the two applications as separate services:
+
+### Backend on Render
+
+1. Create a new **Blueprint** in Render using the repository-root `render.yaml`.
+2. Set `FRONTEND_URL` to the final Vercel URL, for example
+   `https://signalscope.vercel.app`.
+3. Render runs Django with `SIGNALSCOPE_ENABLE_ML=False` by default. This is intentional:
+   model checkpoints are excluded from Git and Vercel/Render serverless-style deployments
+   should not download multi-gigabyte training artifacts during a build.
+4. Copy the deployed Render URL, such as `https://signalscope-api.onrender.com`.
+
+The Render service uses SQLite and local media storage for the demo deployment. Render's
+filesystem is ephemeral, so use a managed PostgreSQL database and object storage
+(Cloudinary, S3, or equivalent) before treating uploaded scans as persistent production data.
+
+### Frontend on Vercel
+
+1. Import the repository into Vercel.
+2. Set the project root directory to `Frontend&Backend/app/frontend`.
+3. Set the build command to `npm run build` and the output directory to `dist`.
+4. Add these environment variables:
+
+   ```
+   VITE_API_URL=https://signalscope-api.onrender.com
+   VITE_USE_MOCK_API=false
+   ```
+
+The included `app/frontend/vercel.json` rewrites all SPA routes to `index.html`, so
+routes such as `/analyze` and `/history` work after a page refresh.
