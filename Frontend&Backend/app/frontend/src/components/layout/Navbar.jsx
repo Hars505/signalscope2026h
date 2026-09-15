@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X, ArrowRight, Activity, ToggleLeft, ToggleRight } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { isMockModeEnabled, setMockModePreference } from '../../lib/api';
+import { isMockModeEnabled, setMockModePreference } from '@/lib/api';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
