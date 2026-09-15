@@ -2,9 +2,9 @@ services:
   - type: web
     name: signalscope-api
     runtime: python
-    rootDir: "Frontend&Backend/app/backend"
-    buildCommand: pip install -r requirements-render.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput
-    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+    rootDir: .
+    buildCommand: cd "Frontend&Backend/app/backend" && pip install -r requirements-render.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput
+    startCommand: cd "Frontend&Backend/app/backend" && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 1 --timeout 120
     healthCheckPath: /api/docs/schema/
     envVars:
       - key: PYTHON_VERSION
